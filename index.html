@@ -997,100 +997,140 @@
     </section>
 
     <!-- Section RSVP & Ucapan -->
-    <section class="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-md my-8">
-      <h2 class="text-xl uppercase font-bold text-center mb-4 text-black font-body">
-        RSVP & Ucapan
-      </h2>
-
-      <!-- Form Input -->
+    <section class="max-w-md mx-auto p-4 space-y-6">
       <div class="grid grid-cols-2 gap-3 mb-6 text-center">
         <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
-          <span class="block text-xs text-emerald-600 font-medium">Hadir</span>
-          <span id="rekap-hadir" class="text-lg font-bold text-emerald-700">0</span>
+          <span class="block text-xs font-semibold text-emerald-600">Total Hadir</span>
+          <span id="rekap-hadir" class="text-xl font-bold text-emerald-700">0 Orang</span>
         </div>
         <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl">
-          <span class="block text-xs text-rose-600 font-medium">Tidak Hadir</span>
-          <span id="rekap-tidak-hadir" class="text-lg font-bold text-rose-700"></span>
+          <span class="block text-xs font-semibold text-rose-600">Tidak Hadir</span>
+          <span id="rekap-tidak-hadir" class="text-xl font-bold text-rose-700">0 Tamu</span>
         </div>
       </div>
-      <form id="form-rsvp" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold mb-1 text-slate-700">Nama</label>
-          <input
-            type="text"
-            id="input-nama"
-            required
-            placeholder="Nama Anda"
-            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
-          />
-        </div>
 
-        <div>
-          <label class="block text-xs font-semibold mb-1 text-slate-700"
-            >Konfirmasi Kehadiran</label
+      <!-- ============================================================ -->
+      <!-- FORM 1: KONFIRMASI KEHADIRAN (Hanya 1x Pengisian)            -->
+      <!-- ============================================================ -->
+      <div class="mb-8 p-4 bg-white border border-slate-200 rounded-2xl shadow-sm">
+        <h3 class="font-bold text-slate-800 text-sm mb-3">Konfirmasi Kehadiran (RSVP)</h3>
+
+        <!-- Pesan jika sudah pernah mengisi -->
+        <div id="info-rsvp" class="hidden">
+          <div
+            class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-center text-xs"
           >
-          <select
-            id="input-kehadiran"
-            required
-            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+            <p class="font-bold mb-1">Konfirmasi Kehadiran Terkirim!</p>
+            <p class="mb-2 text-[11px]">Kamu sudah melakukan konfirmasi kehadiran sebelumnya.</p>
+            <button
+              onclick="editRSVP()"
+              class="px-3 py-1 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700"
+            >
+              Ubah Konfirmasi
+            </button>
+          </div>
+        </div>
+
+        <!-- Form RSVP -->
+        <form id="form-rsvp" class="space-y-3">
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Nama</label>
+            <input
+              type="text"
+              id="input-nama-rsvp"
+              required
+              placeholder="Nama Anda"
+              class="w-full p-2 border border-slate-200 rounded-lg text-xs"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">Kehadiran</label>
+              <select
+                id="input-kehadiran"
+                class="w-full p-2 border border-slate-200 rounded-lg text-xs"
+              >
+                <option value="" disabled selected hidden>Konfirmasi Kehadiran</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Tidak Hadir">Tidak Hadir</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">Jumlah Orang</label>
+              <input
+                type="number"
+                id="input-jumlah"
+                min="1"
+                value="1"
+                class="w-full p-2 border border-slate-200 rounded-lg text-xs"
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            id="btn-kirim-rsvp"
+            class="w-full py-2 bg-emerald-600 text-white font-semibold text-xs rounded-lg hover:bg-slate-900"
           >
-            <option value="Hadir">Hadir</option>
-            <option value="Tidak Hadir">Tidak Hadir</option>
-          </select>
-        </div>
+            Konfirmasi
+          </button>
+        </form>
+      </div>
 
-        <div>
-          <label class="block text-xs font-semibold mb-1 text-slate-700">Jumlah Orang</label>
-          <input
-            type="number"
-            id="input-jumlah"
-            min="1"
-            max="5"
-            value="1"
-            required
-            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
-          />
-        </div>
+      <!-- ============================================================ -->
+      <!-- FORM 2: KIRIM UCAPAN & DOA (Bebas Diisi Kapan Saja)         -->
+      <!-- ============================================================ -->
+      <div class="mb-6 p-4 bg-white border border-slate-200 rounded-2xl shadow-sm">
+        <h3 class="font-bold text-slate-800 text-sm mb-3">Kirim Ucapan & Doa</h3>
+        <form id="form-ucapan" class="space-y-3">
+          <div>
+            <input
+              type="text"
+              id="input-nama-ucapan"
+              required
+              placeholder="Nama Anda"
+              class="w-full p-2 border border-slate-200 rounded-lg text-xs"
+            />
+          </div>
+          <div>
+            <textarea
+              id="input-pesan"
+              required
+              rows="3"
+              placeholder="Tuliskan ucapan & doa..."
+              class="w-full p-2 border border-slate-200 rounded-lg text-xs"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            id="btn-kirim-ucapan"
+            class="w-full py-2 bg-emerald-600 text-white font-semibold text-xs rounded-lg hover:bg-emerald-700"
+          >
+            Kirim Ucapan
+          </button>
+        </form>
+      </div>
 
-        <div>
-          <label class="block text-xs font-semibold mb-1 text-slate-700">Ucapan & Doa</label>
-          <textarea
-            id="input-ucapan"
-            rows="3"
-            placeholder="Tuliskan pesan atau doa..."
-            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
-          ></textarea>
-        </div>
+      <!-- ============================================================ -->
+      <!-- DAFTAR UCAPAN & PAGINASI                                     -->
+      <!-- ============================================================ -->
+      <div id="container-ucapan" class="space-y-2"></div>
 
-        <button
-          type="submit"
-          id="btn-kirim"
-          class="w-full py-2.5 bg-rose-600 text-white font-semibold rounded-lg hover:bg-rose-700 transition"
-        >
-          Kirim Ucapan
-        </button>
-      </form>
-
-      <!-- Tempat Daftar Ucapan -->
-      <div id="container-ucapan" class="space-y-3 min-h-45"></div>
-
-      <!-- Navigasi dengan onclick langsung -->
       <div
         id="pagination-wrapper"
-        class="flex justify-between items-center mt-4 pt-3 border-t border-slate-200"
+        class="flex justify-between items-center mt-4 pt-3 border-t border-slate-200 hidden"
       >
         <button
           id="btn-prev"
           onclick="gantiHalaman(-1)"
-          class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed"
+          class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg disabled:opacity-40"
         >
           &larr; Sebelumnya
         </button>
-        <span id="page-info" class="text-xs text-slate-500 font-medium">Halaman 1 dari 1</span>
+        <span id="page-info" class="text-xs text-slate-500 font-medium">Halaman 1</span>
         <button
           id="btn-next"
           onclick="gantiHalaman(1)"
-          class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed"
+          class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg disabled:opacity-40"
         >
           Selanjutnya &rarr;
         </button>
@@ -1102,10 +1142,6 @@
 
     <!-- 1. Inisialisasi Supabase -->
     <script>
-      let dataUcapan = [];
-      let currentPage = 1;
-      const itemsPerPage = 5;
-
       const SUPABASE_URL = "https://zcbwnojnpfxutfkaglty.supabase.co";
       const SUPABASE_ANON_KEY = "sb_publishable_3Y9fDibifk5S9synoNcFIA_AlJvVbR4";
       const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1113,133 +1149,78 @@
       const formRsvp = document.getElementById("form-rsvp");
       const containerUcapan = document.getElementById("container-ucapan");
 
-      // 2. Fungsi Mengambil & Menampilkan Ucapan
-      async function muatUcapan() {
+      // Variabel Global
+      let dataUcapan = [];
+      let currentPage = 1;
+      const itemsPerPage = 5;
+
+      async function muatData() {
         const { data, error } = await _supabase
           .from("ucapan")
           .select("*")
           .order("created_at", { ascending: false });
 
-        if (error) {
-          console.error("Gagal memuat ucapan:", error);
-          return;
-        }
+        if (error) return console.error("Gagal mengambil data:", error);
 
-        containerUcapan.innerHTML = data
-          .map(
-            (item) => `
-      <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left">
-        <div class="flex justify-between items-center mb-1">
-          <span class="font-bold text-xs text-slate-800">${item.nama} (${item.jumlah_orang} Orang)</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full ${
-            item.kehadiran === "Hadir"
-              ? "bg-emerald-100 text-emerald-700"
-              : "bg-rose-100 text-rose-700"
-          }">${item.kehadiran}</span>
-        </div>
-        <p class="text-xs text-slate-600">${item.ucapan || "-"}</p>
-      </div>
-    `,
-          )
-          .join("");
-      }
+        const allData = data || [];
 
-      // 3. Fungsi Mengirim Data Baru
-      formRsvp.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const btnKirim = document.getElementById("btn-kirim");
-        btnKirim.disabled = true;
-        btnKirim.innerText = "Mengirim...";
-
-        const nama = document.getElementById("input-nama").value;
-        const kehadiran = document.getElementById("input-kehadiran").value;
-        const jumlah_orang = parseInt(document.getElementById("input-jumlah").value) || 1;
-        const ucapan = document.getElementById("input-ucapan").value;
-
-        const { error } = await _supabase
-          .from("ucapan")
-          .insert([{ nama, kehadiran, jumlah_orang, ucapan }]);
-
-        if (!error) {
-          formRsvp.reset();
-          await muatUcapan();
-        } else {
-          alert("Gagal mengirim ucapan. Pastikan RLS Supabase sudah dikonfigurasi.");
-          console.error(error);
-        }
-
-        btnKirim.disabled = false;
-        btnKirim.innerText = "Kirim Ucapan";
-      });
-
-      // Muat ucapan saat halaman pertama kali dibuka
-      // Variabel Penampung Paginasi
-      async function muatUcapan() {
-        const { data, error } = await _supabase
-          .from("ucapan")
-          .select("*")
-          .order("created_at", { ascending: false });
-
-        if (error) {
-          console.error("Error Supabase:", error);
-          return;
-        }
-
-        // Masukkan data ke variabel global (JANGAN gunakan 'const dataUcapan = ...')
-        dataUcapan = data || [];
-
-        // Hitung Rekap
-        const totalHadir = dataUcapan
+        // Hitung Rekap Kehadiran
+        const totalHadir = allData
           .filter((item) => item.kehadiran === "Hadir")
           .reduce((sum, item) => sum + (parseInt(item.jumlah_orang) || 1), 0);
-        const totalTidakHadir = dataUcapan.filter(
-          (item) => item.kehadiran === "Tidak Hadir",
-        ).length;
+
+        const totalTidakHadir = allData.filter((item) => item.kehadiran === "Tidak Hadir").length;
 
         const elHadir = document.getElementById("rekap-hadir");
         const elTidakHadir = document.getElementById("rekap-tidak-hadir");
         if (elHadir) elHadir.innerText = `${totalHadir} Orang`;
         if (elTidakHadir) elTidakHadir.innerText = `${totalTidakHadir} Tamu`;
 
+        // Filter hanya data yang memiliki teks ucapan untuk ditampilkan di daftar
+        dataUcapan = allData.filter((item) => item.ucapan && item.ucapan.trim() !== "");
+
         renderHalaman();
       }
 
       function renderHalaman() {
-        const containerUcapan = document.getElementById("container-ucapan");
+        const container = document.getElementById("container-ucapan");
         const totalPages = Math.ceil(dataUcapan.length / itemsPerPage) || 1;
 
-        // Ambil potongan data ucapan untuk halaman yang aktif
         const start = (currentPage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const pageData = dataUcapan.slice(start, end);
+        const pageData = dataUcapan.slice(start, start + itemsPerPage);
 
-        if (!containerUcapan) return;
+        if (!container) return;
 
         if (pageData.length === 0) {
-          containerUcapan.innerHTML =
+          container.innerHTML =
             '<p class="text-center text-xs text-slate-400 py-4">Belum ada ucapan.</p>';
         } else {
-          containerUcapan.innerHTML = pageData
+          container.innerHTML = pageData
             .map(
               (item) => `
-      <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left mb-2">
-        <div class="flex justify-between items-center mb-1">
-          <span class="font-bold text-xs text-slate-800">${item.nama} (${item.jumlah_orang} Orang)</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full ${
-            item.kehadiran === "Hadir"
-              ? "bg-emerald-100 text-emerald-700"
-              : "bg-rose-100 text-rose-700"
-          }">${item.kehadiran}</span>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-xs text-slate-800">${item.nama}</span>
+            ${
+              item.kehadiran
+                ? `
+              <span class="text-[10px] px-2 py-0.5 rounded-full ${
+                item.kehadiran === "Hadir"
+                  ? "bg-emerald-100 text-emerald-700"
+                  : "bg-rose-100 text-rose-700"
+              }">${item.kehadiran}</span>
+            `
+                : ""
+            }
+          </div>
+          <p class="text-xs text-slate-600">${item.ucapan}</p>
         </div>
-        <p class="text-xs text-slate-600">${item.ucapan || "-"}</p>
-      </div>
-    `,
+      `,
             )
             .join("");
         }
 
-        // Update Status Tombol & Teks Halaman
+        // Update Navigasi Paginasi
         const wrapper = document.getElementById("pagination-wrapper");
         const pageInfo = document.getElementById("page-info");
         const btnPrev = document.getElementById("btn-prev");
@@ -1257,17 +1238,144 @@
         }
       }
 
-      // Fungsi pindah halaman yang langsung dipanggil dari atribut onclick
       function gantiHalaman(arah) {
         const totalPages = Math.ceil(dataUcapan.length / itemsPerPage);
         const targetPage = currentPage + arah;
-
         if (targetPage >= 1 && targetPage <= totalPages) {
           currentPage = targetPage;
           renderHalaman();
         }
       }
-      muatUcapan();
+
+      // -------------------------------------------------------------
+      // KONTROL KUNCI FORM RSVP (1x Pengisian)
+      // -------------------------------------------------------------
+      function cekStatusRSVP() {
+        const sudahRSVP = localStorage.getItem("rsvp_selesai");
+        const formRsvp = document.getElementById("form-rsvp");
+        const infoRSVP = document.getElementById("info-rsvp");
+
+        if (sudahRSVP === "true") {
+          if (formRsvp) formRsvp.classList.add("hidden");
+          if (infoRSVP) infoRSVP.classList.remove("hidden");
+        } else {
+          if (formRsvp) formRsvp.classList.remove("hidden");
+          if (infoRSVP) infoRSVP.classList.add("hidden");
+        }
+      }
+
+      async function editRSVP() {
+        const rsvpId = localStorage.getItem("rsvp_id");
+
+        // 1. Jika ada ID tersimpan, hapus baris data tersebut di Supabase
+        if (rsvpId) {
+          const { error } = await _supabase.from("ucapan").delete().eq("id", rsvpId);
+
+          if (error) {
+            console.error("Gagal menghapus data lama di Supabase:", error);
+          }
+        }
+
+        // 2. Hapus simpanan tanda di browser
+        localStorage.removeItem("rsvp_id");
+        localStorage.removeItem("rsvp_selesai");
+
+        // 3. Tampilkan kembali form dan perbarui rekap angka kehadiran
+        cekStatusRSVP();
+        await muatData();
+      }
+
+      // -------------------------------------------------------------
+      // EVENT SUBMIT FORM
+      // -------------------------------------------------------------
+      document.addEventListener("DOMContentLoaded", () => {
+        muatData();
+        cekStatusRSVP();
+
+        // =========================================================
+        // 1. UPDATE BARIS INSERT DI SINI UNTUK FORM RSVP
+        // =========================================================
+        document.getElementById("form-rsvp")?.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btn-kirim-rsvp");
+
+          const kehadiran = document.getElementById("input-kehadiran").value;
+          if (!kehadiran) {
+            alert("Silakan pilih konfirmasi kehadiran terlebih dahulu.");
+            return;
+          }
+
+          btn.disabled = true;
+          btn.innerText = "Mengirim...";
+
+          const nama = document.getElementById("input-nama-rsvp").value;
+          const jumlah_orang = parseInt(document.getElementById("input-jumlah").value) || 1;
+
+          // Tambahkan .select() di akhir kueri insert
+          const { data, error } = await _supabase
+            .from("ucapan")
+            .insert([
+              {
+                nama: nama,
+                kehadiran: kehadiran,
+                jumlah_orang: jumlah_orang,
+                ucapan: "",
+              },
+            ])
+            .select();
+
+          if (!error && data && data.length > 0) {
+            // Simpan ID data dari Supabase ke localStorage
+            localStorage.setItem("rsvp_id", data[0].id);
+            localStorage.setItem("rsvp_selesai", "true");
+
+            document.getElementById("form-rsvp").reset();
+            cekStatusRSVP();
+            await muatData();
+          } else {
+            alert("Gagal mengirim konfirmasi.");
+            console.error(error);
+          }
+
+          btn.disabled = false;
+          btn.innerText = "Kirim Konfirmasi Kehadiran";
+        });
+
+        // =========================================================
+        // 2. UPDATE BARIS INSERT DI SINI UNTUK FORM UCAPAN
+        // =========================================================
+        document.getElementById("form-ucapan")?.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btn-kirim-ucapan");
+          btn.disabled = true;
+          btn.innerText = "Mengirim...";
+
+          const nama = document.getElementById("input-nama-ucapan").value;
+          const ucapan = document.getElementById("input-pesan").value;
+
+          // --- BARIS INSERT YANG DIPERBARUI ---
+          const { error } = await _supabase.from("ucapan").insert([
+            {
+              nama: nama,
+              ucapan: ucapan,
+              kehadiran: null,
+              jumlah_orang: null,
+            },
+          ]);
+
+          if (!error) {
+            document.getElementById("form-ucapan").reset();
+            currentPage = 1;
+            await muatData();
+          } else {
+            alert("Gagal mengirim ucapan.");
+            console.error(error);
+          }
+
+          btn.disabled = false;
+          btn.innerText = "Kirim Ucapan";
+        });
+      });
     </script>
 
     <!-- AUDIO BACKGROUND & TOMBOL FLOATING (POJOK KANAN BAWAH)-->
