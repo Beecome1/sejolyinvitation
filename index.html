@@ -1071,17 +1071,17 @@
         </button>
       </form>
 
-      <!-- Tempat Menampilkan Ucapan -->
       <!-- Tempat Daftar Ucapan -->
       <div id="container-ucapan" class="space-y-3 min-h-45"></div>
 
-      <!-- ELEMEN YANG DIBUTUHKAN (id="pagination-wrapper") -->
+      <!-- Navigasi dengan onclick langsung -->
       <div
         id="pagination-wrapper"
         class="flex justify-between items-center mt-4 pt-3 border-t border-slate-200"
       >
         <button
           id="btn-prev"
+          onclick="gantiHalaman(-1)"
           class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           &larr; Sebelumnya
@@ -1089,6 +1089,7 @@
         <span id="page-info" class="text-xs text-slate-500 font-medium">Halaman 1 dari 1</span>
         <button
           id="btn-next"
+          onclick="gantiHalaman(1)"
           class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Selanjutnya &rarr;
@@ -1101,6 +1102,10 @@
 
     <!-- 1. Inisialisasi Supabase -->
     <script>
+      let dataUcapan = [];
+      let currentPage = 1;
+      const itemsPerPage = 5;
+
       const SUPABASE_URL = "https://zcbwnojnpfxutfkaglty.supabase.co";
       const SUPABASE_ANON_KEY = "sb_publishable_3Y9fDibifk5S9synoNcFIA_AlJvVbR4";
       const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1170,21 +1175,21 @@
 
       // Muat ucapan saat halaman pertama kali dibuka
       // Variabel Penampung Paginasi
-      let dataUcapan = [];
-      let currentPage = 1;
-      const itemsPerPage = 5; // Batas ucapan per halaman
-
       async function muatUcapan() {
         const { data, error } = await _supabase
           .from("ucapan")
           .select("*")
           .order("created_at", { ascending: false });
 
-        if (error) return console.error("Gagal memuat:", error);
+        if (error) {
+          console.error("Error Supabase:", error);
+          return;
+        }
 
-        dataUcapan = data; // Simpan seluruh data ke variabel global
+        // Masukkan data ke variabel global (JANGAN gunakan 'const dataUcapan = ...')
+        dataUcapan = data || [];
 
-        // 1. Rekap Angka Total
+        // Hitung Rekap
         const totalHadir = dataUcapan
           .filter((item) => item.kehadiran === "Hadir")
           .reduce((sum, item) => sum + (parseInt(item.jumlah_orang) || 1), 0);
@@ -1194,23 +1199,23 @@
 
         const elHadir = document.getElementById("rekap-hadir");
         const elTidakHadir = document.getElementById("rekap-tidak-hadir");
-
         if (elHadir) elHadir.innerText = `${totalHadir} Orang`;
         if (elTidakHadir) elTidakHadir.innerText = `${totalTidakHadir} Tamu`;
 
-        // 2. Render Tampilan Halaman
         renderHalaman();
       }
 
       function renderHalaman() {
+        const containerUcapan = document.getElementById("container-ucapan");
         const totalPages = Math.ceil(dataUcapan.length / itemsPerPage) || 1;
 
-        // Ambil potongan 5 data sesuai halaman yang aktif
+        // Ambil potongan data ucapan untuk halaman yang aktif
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         const pageData = dataUcapan.slice(start, end);
 
-        // Render Kartu Ucapan
+        if (!containerUcapan) return;
+
         if (pageData.length === 0) {
           containerUcapan.innerHTML =
             '<p class="text-center text-xs text-slate-400 py-4">Belum ada ucapan.</p>';
@@ -1218,7 +1223,7 @@
           containerUcapan.innerHTML = pageData
             .map(
               (item) => `
-      <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left">
+      <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left mb-2">
         <div class="flex justify-between items-center mb-1">
           <span class="font-bold text-xs text-slate-800">${item.nama} (${item.jumlah_orang} Orang)</span>
           <span class="text-[10px] px-2 py-0.5 rounded-full ${
@@ -1234,37 +1239,34 @@
             .join("");
         }
 
-        // Atur Tampilan Tombol Navigasi
-        const paginationWrapper = document.getElementById("pagination-wrapper");
+        // Update Status Tombol & Teks Halaman
+        const wrapper = document.getElementById("pagination-wrapper");
+        const pageInfo = document.getElementById("page-info");
         const btnPrev = document.getElementById("btn-prev");
         const btnNext = document.getElementById("btn-next");
-        const pageInfo = document.getElementById("page-info");
 
-        if (dataUcapan.length > itemsPerPage) {
-          paginationWrapper.classList.remove("hidden");
-          pageInfo.innerText = `Halaman ${currentPage} dari ${totalPages}`;
-          btnPrev.disabled = currentPage === 1;
-          btnNext.disabled = currentPage === totalPages;
-        } else {
-          paginationWrapper.classList.add("hidden");
+        if (wrapper) {
+          if (dataUcapan.length > itemsPerPage) {
+            wrapper.classList.remove("hidden");
+            if (pageInfo) pageInfo.innerText = `Halaman ${currentPage} dari ${totalPages}`;
+            if (btnPrev) btnPrev.disabled = currentPage === 1;
+            if (btnNext) btnNext.disabled = currentPage === totalPages;
+          } else {
+            wrapper.classList.add("hidden");
+          }
         }
       }
 
-      // Event Listener Tombol Navigasi
-      document.getElementById("btn-prev").addEventListener("click", () => {
-        if (currentPage > 1) {
-          currentPage--;
-          renderHalaman();
-        }
-      });
-
-      document.getElementById("btn-next").addEventListener("click", () => {
+      // Fungsi pindah halaman yang langsung dipanggil dari atribut onclick
+      function gantiHalaman(arah) {
         const totalPages = Math.ceil(dataUcapan.length / itemsPerPage);
-        if (currentPage < totalPages) {
-          currentPage++;
+        const targetPage = currentPage + arah;
+
+        if (targetPage >= 1 && targetPage <= totalPages) {
+          currentPage = targetPage;
           renderHalaman();
         }
-      });
+      }
       muatUcapan();
     </script>
 
