@@ -996,123 +996,277 @@
       </div>
     </section>
 
-    <!-- RSVP / Ucapan & Live Comment -->
-    <section class="py-20 px-6 bg-[#7A132A] text-white overflow-hidden">
-      <div
-        class="max-w-5xl mx-auto scroll-anim opacity-0 translate-y-12 transition-all duration-1000 ease-out"
-      >
-        <!-- Judul -->
-        <div class="text-center mb-12">
-          <h2 class="font-wedding text-5xl mb-6">Kehadiran & Ucapan</h2>
-          <p class="text-rose-200 max-w-2xl mx-auto">
-            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
-            berkenan hadir untuk memberikan doa restu.
-          </p>
+    <!-- Section RSVP & Ucapan -->
+    <section class="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-md my-8">
+      <h2 class="text-xl uppercase font-bold text-center mb-4 text-black font-body">
+        RSVP & Ucapan
+      </h2>
+
+      <!-- Form Input -->
+      <div class="grid grid-cols-2 gap-3 mb-6 text-center">
+        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
+          <span class="block text-xs text-emerald-600 font-medium">Hadir</span>
+          <span id="rekap-hadir" class="text-lg font-bold text-emerald-700">0</span>
         </div>
-
-        <!-- Layout 2 Kolom (Kiri: Form, Kanan: Live Comment) -->
-        <div class="grid md:grid-cols-2 gap-8 items-start">
-          <!-- Kolom Kiri: Form RSVP -->
-          <div
-            class="bg-white/10 p-8 rounded-3xl backdrop-blur-md border border-rose-400/30 shadow-xl"
-          >
-            <h3 class="text-2xl font-semibold mb-6 text-rose-100 border-b border-rose-400/20 pb-4">
-              Kirim RSVP
-            </h3>
-            <form id="rsvp-form" class="space-y-4 text-left">
-              <input
-                type="text"
-                id="sender-name"
-                placeholder="Nama Anda"
-                required
-                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-rose-400/50 focus:outline-none focus:ring-2 focus:ring-rose-300 placeholder-rose-200 text-white"
-              />
-              <textarea
-                id="sender-msg"
-                placeholder="Pesan & Doa"
-                rows="4"
-                required
-                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-rose-400/50 focus:outline-none focus:ring-2 focus:ring-rose-300 placeholder-rose-200 text-white"
-              ></textarea>
-              <select
-                id="sender-status"
-                class="w-full px-4 py-3 rounded-xl bg-white border border-rose-400/50 focus:outline-none focus:ring-2 focus:ring-rose-300 text-black"
-              >
-                <option value="Hadir">Ya, Saya Akan Hadir</option>
-                <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
-              </select>
-              <button
-                type="submit"
-                class="w-full py-4 bg-white text-rose-900 font-bold rounded-xl hover:bg-rose-100 transition shadow-lg text-center"
-              >
-                Kirim Ucapan
-              </button>
-            </form>
-          </div>
-
-          <!-- Kolom Kanan: Live Comments Feed -->
-          <div
-            class="bg-white/5 p-6 rounded-3xl border border-rose-400/20 h-125 flex flex-col shadow-inner relative"
-          >
-            <h3 class="text-2xl font-semibold mb-6 text-rose-100 border-b border-rose-400/20 pb-4">
-              Ucapan & Doa (<span id="comment-count">2</span>)
-            </h3>
-
-            <!-- Area Scroll Ucapan -->
-            <div id="comments-container" class="flex-1 overflow-y-auto pr-4 space-y-4 text-left">
-              <!-- Contoh Ucapan 1 -->
-              <div class="bg-white/10 p-5 rounded-2xl border border-rose-300/20 flex gap-4">
-                <!-- Avatar -->
-                <div
-                  class="w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center font-bold text-white shrink-0 shadow-sm"
-                >
-                  B
-                </div>
-                <!-- Konten Teks -->
-                <div class="flex-1 min-w-0">
-                  <div class="flex justify-between items-center mb-1 gap-2">
-                    <h4 class="font-bold text-rose-100 truncate">Budi & Keluarga</h4>
-                    <span
-                      class="text-[10px] uppercase tracking-wider font-bold bg-rose-500 text-white px-2 py-1 rounded-full shrink-0"
-                      >Hadir</span
-                    >
-                  </div>
-                  <p class="text-sm text-rose-200 leading-relaxed wrap-break-words">
-                    Selamat menempuh hidup baru Romeo & Juliet! Semoga menjadi keluarga yang bahagia
-                    selamanya.
-                  </p>
-                  <span class="text-xs text-rose-300/50 mt-2 block">1 Hari yang lalu</span>
-                </div>
-              </div>
-
-              <!-- Contoh Ucapan 2 -->
-              <div class="bg-white/10 p-5 rounded-2xl border border-rose-300/20 flex gap-4">
-                <!-- Avatar -->
-                <div
-                  class="w-10 h-10 rounded-full bg-slate-500 flex items-center justify-center font-bold text-white shrink-0 shadow-sm"
-                >
-                  S
-                </div>
-                <!-- Konten Teks -->
-                <div class="flex-1 min-w-0">
-                  <div class="flex justify-between items-center mb-1 gap-2">
-                    <h4 class="font-bold text-rose-100 truncate">Sarah Capulet</h4>
-                    <span
-                      class="text-[10px] uppercase tracking-wider font-bold bg-slate-500 text-white px-2 py-1 rounded-full shrink-0"
-                      >Tidak Hadir</span
-                    >
-                  </div>
-                  <p class="text-sm text-rose-200 leading-relaxed wrap-break-words">
-                    Maaf belum bisa hadir, tapi doa terbaik untuk kalian berdua. Happy wedding!
-                  </p>
-                  <span class="text-xs text-rose-300/50 mt-2 block">2 Hari yang lalu</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl">
+          <span class="block text-xs text-rose-600 font-medium">Tidak Hadir</span>
+          <span id="rekap-tidak-hadir" class="text-lg font-bold text-rose-700"></span>
         </div>
       </div>
+      <form id="form-rsvp" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold mb-1 text-slate-700">Nama</label>
+          <input
+            type="text"
+            id="input-nama"
+            required
+            placeholder="Nama Anda"
+            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold mb-1 text-slate-700"
+            >Konfirmasi Kehadiran</label
+          >
+          <select
+            id="input-kehadiran"
+            required
+            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+          >
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold mb-1 text-slate-700">Jumlah Orang</label>
+          <input
+            type="number"
+            id="input-jumlah"
+            min="1"
+            max="5"
+            value="1"
+            required
+            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold mb-1 text-slate-700">Ucapan & Doa</label>
+          <textarea
+            id="input-ucapan"
+            rows="3"
+            placeholder="Tuliskan pesan atau doa..."
+            class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          id="btn-kirim"
+          class="w-full py-2.5 bg-rose-600 text-white font-semibold rounded-lg hover:bg-rose-700 transition"
+        >
+          Kirim Ucapan
+        </button>
+      </form>
+
+      <!-- Tempat Menampilkan Ucapan -->
+      <!-- Tempat Daftar Ucapan -->
+      <div id="container-ucapan" class="space-y-3 min-h-[180px]"></div>
+
+      <!-- ELEMEN YANG DIBUTUHKAN (id="pagination-wrapper") -->
+      <div
+        id="pagination-wrapper"
+        class="flex justify-between items-center mt-4 pt-3 border-t border-slate-200 hidden"
+      >
+        <button
+          id="btn-prev"
+          class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          &larr; Sebelumnya
+        </button>
+        <span id="page-info" class="text-xs text-slate-500 font-medium">Halaman 1 dari 1</span>
+        <button
+          id="btn-next"
+          class="px-3 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          Selanjutnya &rarr;
+        </button>
+      </div>
     </section>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 1. Inisialisasi Supabase -->
+    <script>
+      const SUPABASE_URL = "https://zcbwnojnpfxutfkaglty.supabase.co";
+      const SUPABASE_ANON_KEY = "sb_publishable_3Y9fDibifk5S9synoNcFIA_AlJvVbR4";
+      const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      const formRsvp = document.getElementById("form-rsvp");
+      const containerUcapan = document.getElementById("container-ucapan");
+
+      // 2. Fungsi Mengambil & Menampilkan Ucapan
+      async function muatUcapan() {
+        const { data, error } = await _supabase
+          .from("ucapan")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Gagal memuat ucapan:", error);
+          return;
+        }
+
+        containerUcapan.innerHTML = data
+          .map(
+            (item) => `
+      <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left">
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-bold text-xs text-slate-800">${item.nama} (${item.jumlah_orang} Orang)</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full ${
+            item.kehadiran === "Hadir"
+              ? "bg-emerald-100 text-emerald-700"
+              : "bg-rose-100 text-rose-700"
+          }">${item.kehadiran}</span>
+        </div>
+        <p class="text-xs text-slate-600">${item.ucapan || "-"}</p>
+      </div>
+    `,
+          )
+          .join("");
+      }
+
+      // 3. Fungsi Mengirim Data Baru
+      formRsvp.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const btnKirim = document.getElementById("btn-kirim");
+        btnKirim.disabled = true;
+        btnKirim.innerText = "Mengirim...";
+
+        const nama = document.getElementById("input-nama").value;
+        const kehadiran = document.getElementById("input-kehadiran").value;
+        const jumlah_orang = parseInt(document.getElementById("input-jumlah").value) || 1;
+        const ucapan = document.getElementById("input-ucapan").value;
+
+        const { error } = await _supabase
+          .from("ucapan")
+          .insert([{ nama, kehadiran, jumlah_orang, ucapan }]);
+
+        if (!error) {
+          formRsvp.reset();
+          await muatUcapan();
+        } else {
+          alert("Gagal mengirim ucapan. Pastikan RLS Supabase sudah dikonfigurasi.");
+          console.error(error);
+        }
+
+        btnKirim.disabled = false;
+        btnKirim.innerText = "Kirim Ucapan";
+      });
+
+      // Muat ucapan saat halaman pertama kali dibuka
+      // Variabel Penampung Paginasi
+      let dataUcapan = [];
+      let currentPage = 1;
+      const itemsPerPage = 5; // Batas ucapan per halaman
+
+      async function muatUcapan() {
+        const { data, error } = await _supabase
+          .from("ucapan")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) return console.error("Gagal memuat:", error);
+
+        dataUcapan = data; // Simpan seluruh data ke variabel global
+
+        // 1. Rekap Angka Total
+        const totalHadir = dataUcapan
+          .filter((item) => item.kehadiran === "Hadir")
+          .reduce((sum, item) => sum + (parseInt(item.jumlah_orang) || 1), 0);
+        const totalTidakHadir = dataUcapan.filter(
+          (item) => item.kehadiran === "Tidak Hadir",
+        ).length;
+
+        const elHadir = document.getElementById("rekap-hadir");
+        const elTidakHadir = document.getElementById("rekap-tidak-hadir");
+
+        if (elHadir) elHadir.innerText = `${totalHadir} Orang`;
+        if (elTidakHadir) elTidakHadir.innerText = `${totalTidakHadir} Tamu`;
+
+        // 2. Render Tampilan Halaman
+        renderHalaman();
+      }
+
+      function renderHalaman() {
+        const totalPages = Math.ceil(dataUcapan.length / itemsPerPage) || 1;
+
+        // Ambil potongan 5 data sesuai halaman yang aktif
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageData = dataUcapan.slice(start, end);
+
+        // Render Kartu Ucapan
+        if (pageData.length === 0) {
+          containerUcapan.innerHTML =
+            '<p class="text-center text-xs text-slate-400 py-4">Belum ada ucapan.</p>';
+        } else {
+          containerUcapan.innerHTML = pageData
+            .map(
+              (item) => `
+      <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-left">
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-bold text-xs text-slate-800">${item.nama} (${item.jumlah_orang} Orang)</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full ${
+            item.kehadiran === "Hadir"
+              ? "bg-emerald-100 text-emerald-700"
+              : "bg-rose-100 text-rose-700"
+          }">${item.kehadiran}</span>
+        </div>
+        <p class="text-xs text-slate-600">${item.ucapan || "-"}</p>
+      </div>
+    `,
+            )
+            .join("");
+        }
+
+        // Atur Tampilan Tombol Navigasi
+        const paginationWrapper = document.getElementById("pagination-wrapper");
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+        const pageInfo = document.getElementById("page-info");
+
+        if (dataUcapan.length > itemsPerPage) {
+          paginationWrapper.classList.remove("hidden");
+          pageInfo.innerText = `Halaman ${currentPage} dari ${totalPages}`;
+          btnPrev.disabled = currentPage === 1;
+          btnNext.disabled = currentPage === totalPages;
+        } else {
+          paginationWrapper.classList.add("hidden");
+        }
+      }
+
+      // Event Listener Tombol Navigasi
+      document.getElementById("btn-prev").addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderHalaman();
+        }
+      });
+
+      document.getElementById("btn-next").addEventListener("click", () => {
+        const totalPages = Math.ceil(dataUcapan.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderHalaman();
+        }
+      });
+      muatUcapan();
+    </script>
 
     <!-- AUDIO BACKGROUND & TOMBOL FLOATING (POJOK KANAN BAWAH)-->
     <audio id="bg-music" loop>
@@ -1208,58 +1362,6 @@
     document.querySelectorAll(".scroll-anim").forEach((el) => {
       observer.observe(el);
     });
-
-    // --- 3. Logika Live Comment RSVP ---
-    const rsvpForm = document.getElementById("rsvp-form");
-    const commentsContainer = document.getElementById("comments-container");
-    const commentCount = document.getElementById("comment-count");
-    let currentCount = 2;
-
-    if (rsvpForm && commentsContainer) {
-      rsvpForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const name = document.getElementById("sender-name").value;
-        const msg = document.getElementById("sender-msg").value;
-        const status = document.getElementById("sender-status").value;
-
-        // Mengambil huruf pertama untuk Avatar
-        const initial = name.charAt(0).toUpperCase();
-
-        const badgeColor = status === "Hadir" ? "bg-rose-500" : "bg-slate-500";
-        const avatarColor = status === "Hadir" ? "bg-rose-500" : "bg-slate-500";
-
-        const newComment = document.createElement("div");
-        // Class pembungkus utama (sama dengan contoh statis)
-        newComment.className =
-          "bg-white/10 p-5 rounded-2xl border border-rose-300/20 flex gap-4 opacity-0 -translate-y-4 transition-all duration-500";
-
-        newComment.innerHTML = `
-          <!-- Avatar -->
-          <div class="w-10 h-10 rounded-full ${avatarColor} flex items-center justify-center font-bold text-white shrink-0 shadow-sm">${initial}</div>
-          <!-- Konten Teks -->
-          <div class="flex-1 min-w-0">
-            <div class="flex justify-between items-center mb-1 gap-2">
-              <h4 class="font-bold text-rose-100 truncate">${name}</h4>
-              <span class="text-[10px] uppercase tracking-wider font-bold ${badgeColor} text-white px-2 py-1 rounded-full shrink-0">${status}</span>
-            </div>
-            <p class="text-sm text-rose-200 leading-relaxed break-words">${msg}</p>
-            <span class="text-xs text-rose-300/50 mt-2 block">Baru saja</span>
-          </div>
-        `;
-
-        commentsContainer.prepend(newComment);
-
-        setTimeout(() => {
-          newComment.classList.remove("opacity-0", "-translate-y-4");
-        }, 50);
-
-        currentCount++;
-        commentCount.innerText = currentCount;
-
-        rsvpForm.reset();
-      });
-    }
 
     // --- 4. Logika Auto-Scroll Galeri Foto (GPU + Navigator Desktop) ---
     const galleryContainer = document.getElementById("gallery-container");
