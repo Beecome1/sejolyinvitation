@@ -57,21 +57,24 @@
 
     <script>
       function generateLink() {
-        const nama = document.getElementById("input-nama-tamu").value.trim();
-        if (!nama) return alert("Masukkan nama tamu terlebih dahulu.");
+        const namaInput = document.getElementById("input-nama").value.trim();
+        if (!namaInput) return alert("Silakan masukkan nama tamu terlebih dahulu!");
 
-        // Gunakan alamat localhost saat pengujian (Ganti domain ini jika sudah di-deploy)
-        const baseUrl = `${window.location.origin}/index.html`;
-        const linkLengkap = `${baseUrl}?to=${encodeURIComponent(nama)}`;
+        // MENGGANTI 'generator.html' MENJADI 'index.html' SECARA OTOMATIS
+        // Solusi ini bekerja akurat di Localhost, GitHub Pages, maupun Custom Domain
+        const baseUrl = window.location.href.replace("generator.html", "index.html").split("?")[0];
 
+        // Buat link lengkap dengan parameter ?to=
+        const linkLengkap = `${baseUrl}?to=${encodeURIComponent(namaInput)}`;
+
+        // Pasang ke input hasil
         document.getElementById("output-link").value = linkLengkap;
 
         // Draft pesan WhatsApp
-        const pesanWA = `Halo ${nama},\n\nTanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.\n\nDetail lengkap acara dapat dilihat melalui tautan undangan berikut:\n${linkLengkap}\n\nMerupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.\n\nTerima kasih.`;
+        const pesanWA = `Halo ${namaInput},\n\nTanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di acara pernikahan kami.\n\nDetail lengkap acara dapat diakses melalui tautan berikut:\n${linkLengkap}\n\nTerima kasih.`;
 
-        const linkWA = `https://wa.me/?text=${encodeURIComponent(pesanWA)}`;
-        document.getElementById("btn-wa").href = linkWA;
-
+        document.getElementById("btn-wa").href =
+          `https://wa.me/?text=${encodeURIComponent(pesanWA)}`;
         document.getElementById("hasil-box").classList.remove("hidden");
       }
     </script>
