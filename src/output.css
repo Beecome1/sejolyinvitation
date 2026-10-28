@@ -455,6 +455,9 @@
   .h-18 {
     height: calc(var(--spacing) * 18);
   }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
   .h-32 {
     height: calc(var(--spacing) * 32);
   }
@@ -505,6 +508,9 @@
   }
   .w-16 {
     width: calc(var(--spacing) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
   }
   .w-32 {
     width: calc(var(--spacing) * 32);
@@ -984,6 +990,9 @@
   }
   .object-\[center_80\%\] {
     object-position: center 80%;
+  }
+  .object-center {
+    object-position: center;
   }
   .p-0\.5 {
     padding: calc(var(--spacing) * 0.5);
