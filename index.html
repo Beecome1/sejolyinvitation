@@ -30,7 +30,7 @@
       <!-- LAYER 1: BACKGROUND GAMBAR (HANYA INI YANG DI-SCALE) -->
       <div
         class="absolute inset-0 bg-cover bg-center scale-125"
-        style="background-image: url(./src/img/sampul.webp)"
+        style="background-image: url(./src/img/foto-cover.jpg)"
       ></div>
 
       <!-- LAYER 2: OVERLAY GELAP -->
@@ -126,10 +126,8 @@
         <p
           class="text-xs text-shadow-lg md:text-xl font-light text-white mb-8 italic max-w-2xl mx-auto drop-shadow-sm"
         >
-          "Demikianlah mereka bukan lagi dua, melainkan satu. <br />Karena itu, apa yang telah
-          dipersatukan Allah, <br />
-          tidak boleh diceraikan manusia" <br />
-          (Matius 19:6)
+          So they are no longer two, but one flesh. <br />Therefore what God has joined together,
+          let no one separate. <br />(Matthew 19:6)
         </p>
 
         <!-- Kotak Tanggal & Countdown -->
@@ -1052,14 +1050,14 @@
                 type="number"
                 id="input-jumlah"
                 min="1"
-                max="4"
+                max="2"
                 value="1"
                 oninput="validasiJumlahTamu(this)"
                 class="w-full p-2 border border-slate-200 rounded-lg text-xs"
               />
               <!-- Pesan Peringatan (Tampil jika input melebihi batas) -->
               <p id="error-jumlah-tamu" class="text-[10px] text-rose-400 hidden">
-                Maksimal jumlah kehadiran adalah 4 orang.
+                Maksimal jumlah kehadiran adalah 2 orang.
               </p>
             </div>
           </div>
@@ -1809,7 +1807,7 @@
 
     function validasiJumlahTamu(input) {
       const min = parseInt(input.min) || 1;
-      const max = parseInt(input.max) || 4; // Ganti batas maksimal jika perlu
+      const max = parseInt(input.max) || 2; // Ganti batas maksimal jika perlu
       let val = parseInt(input.value);
 
       const elPesan = document.getElementById("error-jumlah-tamu");
