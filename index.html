@@ -1051,14 +1051,15 @@
               <input
                 type="number"
                 id="input-jumlah"
-                min="2"
+                min="1"
                 max="4"
                 value="1"
+                oninput="validasiJumlahTamu(this)"
                 class="w-full p-2 border border-slate-200 rounded-lg text-xs"
               />
               <!-- Pesan Peringatan (Tampil jika input melebihi batas) -->
               <p id="error-jumlah-tamu" class="text-[10px] text-rose-400 hidden">
-                Maksimal jumlah kehadiran adalah 2 orang.
+                Maksimal jumlah kehadiran adalah 4 orang.
               </p>
             </div>
           </div>
@@ -1806,7 +1807,7 @@
 
     function validasiJumlahTamu(input) {
       const min = parseInt(input.min) || 1;
-      const max = parseInt(input.max) || 2; // Ganti batas maksimal jika perlu
+      const max = parseInt(input.max) || 4; // Ganti batas maksimal jika perlu
       let val = parseInt(input.value);
 
       const elPesan = document.getElementById("error-jumlah-tamu");
