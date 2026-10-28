@@ -1051,10 +1051,15 @@
               <input
                 type="number"
                 id="input-jumlah"
-                min="1"
+                min="2"
+                max="4"
                 value="1"
                 class="w-full p-2 border border-slate-200 rounded-lg text-xs"
               />
+              <!-- Pesan Peringatan (Tampil jika input melebihi batas) -->
+              <p id="error-jumlah-tamu" class="text-[10px] text-rose-400 hidden">
+                Maksimal jumlah kehadiran adalah 2 orang.
+              </p>
             </div>
           </div>
           <button
@@ -1797,6 +1802,29 @@
         btn.innerHTML = teksAsli;
         btn.classList.remove("bg-emerald-600", "text-white");
       }, 2000);
+    }
+
+    function validasiJumlahTamu(input) {
+      const min = parseInt(input.min) || 1;
+      const max = parseInt(input.max) || 2; // Ganti batas maksimal jika perlu
+      let val = parseInt(input.value);
+
+      const elPesan = document.getElementById("error-jumlah-tamu");
+
+      // Jika tamu mengetik angka lebih besar dari batas maksimal
+      if (val > max) {
+        input.value = max; // Paksa kembalikan ke angka maksimal
+        if (elPesan) elPesan.classList.remove("hidden");
+      }
+      // Jika tamu mengetik angka kurang dari 1
+      else if (val < min || isNaN(val)) {
+        if (val < min) input.value = min;
+        if (elPesan) elPesan.classList.add("hidden");
+      }
+      // Jika angka valid
+      else {
+        if (elPesan) elPesan.classList.add("hidden");
+      }
     }
   </script>
 </html>

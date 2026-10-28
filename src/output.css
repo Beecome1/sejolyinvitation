@@ -407,9 +407,6 @@
   .hidden {
     display: none;
   }
-  .inline {
-    display: inline;
-  }
   .inline-block {
     display: inline-block;
   }
@@ -747,14 +744,8 @@
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
   }
-  .border-amber-50 {
-    border-color: var(--color-amber-50);
-  }
   .border-amber-200 {
     border-color: var(--color-amber-200);
-  }
-  .border-black {
-    border-color: var(--color-black);
   }
   .border-emerald-200 {
     border-color: var(--color-emerald-200);
@@ -788,12 +779,6 @@
   }
   .border-slate-200 {
     border-color: var(--color-slate-200);
-  }
-  .border-slate-800\/50 {
-    border-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 50%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      border-color: color-mix(in oklab, var(--color-slate-800) 50%, transparent);
-    }
   }
   .border-white {
     border-color: var(--color-white);
@@ -834,37 +819,16 @@
   .bg-amber-50 {
     background-color: var(--color-amber-50);
   }
-  .bg-black {
-    background-color: var(--color-black);
-  }
   .bg-black\/40 {
     background-color: color-mix(in srgb, #000 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
     }
   }
-  .bg-black\/45 {
-    background-color: color-mix(in srgb, #000 45%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-black) 45%, transparent);
-    }
-  }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 50%, transparent);
-    }
-  }
-  .bg-black\/65 {
-    background-color: color-mix(in srgb, #000 65%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-black) 65%, transparent);
-    }
-  }
-  .bg-black\/75 {
-    background-color: color-mix(in srgb, #000 75%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-black) 75%, transparent);
     }
   }
   .bg-black\/90 {
@@ -932,15 +896,6 @@
   }
   .bg-slate-900 {
     background-color: var(--color-slate-900);
-  }
-  .bg-slate-950 {
-    background-color: var(--color-slate-950);
-  }
-  .bg-slate-950\/75 {
-    background-color: color-mix(in srgb, oklch(12.9% 0.042 264.695) 75%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-slate-950) 75%, transparent);
-    }
   }
   .bg-white {
     background-color: var(--color-white);
@@ -1030,9 +985,6 @@
   .object-\[center_80\%\] {
     object-position: center 80%;
   }
-  .object-center {
-    object-position: center;
-  }
   .p-0\.5 {
     padding: calc(var(--spacing) * 0.5);
   }
@@ -1104,12 +1056,6 @@
   }
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
-  }
-  .py-9 {
-    padding-block: calc(var(--spacing) * 9);
-  }
-  .py-12 {
-    padding-block: calc(var(--spacing) * 12);
   }
   .py-16 {
     padding-block: calc(var(--spacing) * 16);
@@ -1252,9 +1198,6 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
-  .text-amber-400 {
-    color: var(--color-amber-400);
-  }
   .text-amber-800 {
     color: var(--color-amber-800);
   }
@@ -1290,9 +1233,6 @@
   }
   .text-rose-900 {
     color: var(--color-rose-900);
-  }
-  .text-slate-200 {
-    color: var(--color-slate-200);
   }
   .text-slate-300 {
     color: var(--color-slate-300);
@@ -1442,10 +1382,6 @@
   .delay-500 {
     transition-delay: 500ms;
   }
-  .duration-200 {
-    --tw-duration: 200ms;
-    transition-duration: 200ms;
-  }
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
@@ -1582,9 +1518,6 @@
     }
     .hover\:bg-white:hover {
       background-color: var(--color-white);
-    }
-    .hover\:text-amber-400:hover {
-      color: var(--color-amber-400);
     }
     .hover\:text-black:hover {
       color: var(--color-black);
@@ -1812,10 +1745,6 @@
     .md\:text-xl {
       font-size: var(--text-xl);
       line-height: var(--tw-leading, var(--text-xl--line-height));
-    }
-    .md\:text-xs {
-      font-size: var(--text-xs);
-      line-height: var(--tw-leading, var(--text-xs--line-height));
     }
   }
   @media (width >= 64rem) {
