@@ -68,30 +68,31 @@
 
     <script>
       function generateLink() {
-        const namaInput = document
-          .getElementById("input-nama-tamu")
-          .value.trim();
-        if (!namaInput)
-          return alert("Silakan masukkan nama tamu terlebih dahulu!");
+        const elInput = document.getElementById("input-nama-tamu");
+        const elOutput = document.getElementById("output-link");
+        const elBtnWa = document.getElementById("btn-wa");
+        const elHasilBox = document.getElementById("hasil-box");
 
-        // MENGGANTI 'generator.html' MENJADI 'index.html' SECARA OTOMATIS
-        // Solusi ini bekerja akurat di Localhost, GitHub Pages, maupun Custom Domain
-        const baseUrl = window.location.href
-          .replace("generator.html", "index.html")
-          .split("?")[0];
+        const namaInput = elInput ? elInput.value.trim() : "";
+        if (!namaInput) return alert("Silakan masukkan nama tamu!");
 
-        // Buat link lengkap dengan parameter ?to=
+        // Ambil URL folder saat ini secara dinamis
+        let currentUrl = window.location.href.split("?")[0].split("#")[0];
+
+        // Hapus 'generator.html' dari URL agar mengarah ke root folder pasangan tersebut
+        let baseUrl = currentUrl.replace("generator.html", "");
+
+        // Hasil link bersih: https://nikahyuk.com/nama-folder/?to=Nama+Tamu
         const linkLengkap = `${baseUrl}?to=${encodeURIComponent(namaInput)}`;
 
-        // Pasang ke input hasil
-        document.getElementById("output-link").value = linkLengkap;
+        if (elOutput) elOutput.value = linkLengkap;
 
-        // Draft pesan WhatsApp
-        const pesanWA = `Halo ${namaInput},\n\nTanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di acara pernikahan kami.\n\nDetail lengkap acara dapat diakses melalui tautan berikut:\n${linkLengkap}\n\nTerima kasih.`;
+        // Isi Pesan WhatsApp
+        const pesanWA = `Halo ${namaInput},\n\nTanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di acara pernikahan kami.\n\nDetail acara: ${linkLengkap}`;
+        if (elBtnWa)
+          elBtnWa.href = `https://wa.me/?text=${encodeURIComponent(pesanWA)}`;
 
-        document.getElementById("btn-wa").href =
-          `https://wa.me/?text=${encodeURIComponent(pesanWA)}`;
-        document.getElementById("hasil-box").classList.remove("hidden");
+        if (elHasilBox) elHasilBox.classList.remove("hidden");
       }
     </script>
   </body>
