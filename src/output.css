@@ -784,6 +784,9 @@
   .border-slate-200 {
     border-color: var(--color-slate-200);
   }
+  .border-slate-800 {
+    border-color: var(--color-slate-800);
+  }
   .border-white {
     border-color: var(--color-white);
   }
@@ -897,9 +900,6 @@
   }
   .bg-slate-800 {
     background-color: var(--color-slate-800);
-  }
-  .bg-slate-900 {
-    background-color: var(--color-slate-900);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -1708,9 +1708,6 @@
     }
     .md\:gap-30 {
       gap: calc(var(--spacing) * 30);
-    }
-    .md\:rounded-3xl {
-      border-radius: var(--radius-3xl);
     }
     .md\:p-10 {
       padding: calc(var(--spacing) * 10);

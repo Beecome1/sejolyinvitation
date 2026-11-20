@@ -350,19 +350,27 @@
         </p>
 
         <!-- Frame Pemutar Video YouTube (Responsif 16:9) -->
+        <!-- SECTION VIDEO MEMPELAI (YOUTUBE EMBED) -->
         <div
-          class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 aspect-video"
+          class="relative w-full max-w-lg mx-auto aspect-video rounded-2xl overflow-hidden shadow-lg border border-slate-800"
         >
-          <video
-            id="video-teaser"
-            src="../src/musik/yohana-ega-teaser.mp4"
-            preload="metadata"
-            playsinline
-            controls
-            class="w-full h-full object-cover"
-          >
-            Browser Anda tidak mendukung pemutaran video HTML5.
-          </video>
+          <iframe
+            class="w-full h-full"
+            src="https://www.youtube.com/embed/kyHO1-cJ54o?rel=0"
+            title="Video Mempelai"
+            loading="lazy"
+            frameborder="0"
+            allow="
+              accelerometer;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+              web-share;
+            "
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </div>
 
         <!-- Tombol Opsional: Buka Langsung di Aplikasi/Web YouTube -->
